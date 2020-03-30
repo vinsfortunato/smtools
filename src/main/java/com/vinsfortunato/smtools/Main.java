@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -50,6 +51,7 @@ public class Main extends Application {
 
         //Setup and show stage
         stage.setTitle(getLang().getString("main.stage.title"));
+        stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/logo.png")));
         stage.setScene(scene);
         stage.setMinWidth(550.0);
         stage.setMinHeight(400.0);
