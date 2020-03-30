@@ -19,36 +19,36 @@ requires Java 8 (or greater) to be installed into the operating system.
 1. Install required Java 8 (or greater)
 2. Download the latest release from [here](https://github.com/vinsfortunato/smtools/releases)
 3. Unpack the release archive
-4. Execute SMTools.jar by clicking on it. Alternatively you can run it from terminal with the following command
+4. Execute SMTools.jar by clicking on it. Alternatively you can run it from shell with the following commands
 ```shell
-$ cd <path-to-release-dir>
-$ java -jar SMTools-<version>.jar
+cd <path-to-release-dir>
+java -jar SMTools-<version>.jar
 ```
 where ```<path-to-release-dir>``` is the path to the extracted release directory and ```<version>``` is the version of the application.
 
 ## How to build (For developers)
 To build the project you need Java JDK 1.11 (or greater) to be installed on your system.  
-Here is a list of commands to clone, build and operating with the project:
+Here is a list of shell commands to clone, build and operating with the project:
 
 **Clone repository**
 ```shell
-$ clone https://github.com/vinsfortunato/smtools/
+clone https://github.com/vinsfortunato/smtools/
 ```
 
 **Build project**
 ```shell
-$ gradlew build
+gradlew build
 ```
 
 **Generate JAR**
 ```shell
-$ gradlew assemble
+gradlew assemble
 ```
 Will generate the application executable JAR inside directory /build/libs relative to project root
 
 **Run application**
 ```shell
-$ gradlew run
+gradlew run
 ```
 
 ## License
