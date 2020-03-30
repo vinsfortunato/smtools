@@ -9,7 +9,7 @@
 <?import javafx.geometry.Insets?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.vinsfortunato.smtools.MainController"
+            fx:controller="com.vinsfortunato.smtools.layout.MainController"
             prefWidth="600.0" prefHeight="500.0">
 
     <top>
