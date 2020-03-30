@@ -5,13 +5,20 @@
 
 ![GUI](/images/screenshot.png?raw=true)
 
+## Table of Contents
+* [Features](#features)
+* [Installation](#installation)
+* [How to build](#how-to-build)
+* [License](#license)
+* [Acknowledgements](#acknowledgements)
+
 ## Features
 - Offset incrementer: Increment/Decrement the offset of a set of SIM files by a given amount
 
 **Upcoming**
 - Set Banner and Background: Set a given banner/background to a set of SIM files
 
-## Installation (For end users)
+## Installation
 The application is provided as an executable JAR file in the release package and
 requires Java 8 (or greater) to be installed into the operating system.
 
@@ -26,7 +33,7 @@ java -jar SMTools-<version>.jar
 ```
 where ```<path-to-release-dir>``` is the path to the extracted release directory and ```<version>``` is the version of the application.
 
-## How to build (For developers)
+## How to build
 To build the project you need Java JDK 1.11 (or greater) to be installed on your system.  
 Here is a list of shell commands to clone, build and operating with the project:
 
