@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executor;
@@ -50,18 +51,17 @@ public class Main extends Application {
         Scene scene = new Scene(root, 600, 400);
 
         //Setup and show stage
-        stage.setTitle(getLang().getString("main.stage.title"));
-        stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/logo.png")));
+        stage.setTitle(MessageFormat.format(getLang().getString("main.stage.title"), Version.getVersion()));
+        stage.getIcons().addAll(getIcons());
         stage.setScene(scene);
         stage.setMinWidth(550.0);
         stage.setMinHeight(400.0);
         stage.show();
     }
 
-
     @Override
     public void stop() {
-        getLogger().info("Stopping application...");
+        getLogger().info("Disposing resources...");
         executor.shutdownNow();
     }
 
@@ -79,5 +79,12 @@ public class Main extends Application {
 
     public static Executor getExecutor() {
         return executor;
+    }
+
+    private static Image[] getIcons() {
+        return new Image[] {
+                new Image(Main.class.getResourceAsStream("/images/logo48.png")),
+                new Image(Main.class.getResourceAsStream("/images/logo32.png"))
+        };
     }
 }
