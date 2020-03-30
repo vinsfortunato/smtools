@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.vinsfortunato.smtools.MainController"
+            prefWidth="600.0" prefHeight="500.0">
+
+    <top>
+        <HBox alignment="CENTER">
+            <Label text="%main.files.label"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <CheckBox fx:id="removeCheckBox" text="%main.files.remove.checkbox" selected="true"/>
+            <Pane minWidth="10" maxWidth="10"/>
+            <Button onAction="#onRemoveSelectedButtonAction" text="%main.files.removeselected.button"/>
+            <Pane minWidth="10" maxWidth="10"/>
+            <Button onAction="#onSelectAllButtonAction" text="%main.files.selectall.button"/>
+            <Pane minWidth="10" maxWidth="10"/>
+            <Button onAction="#onDeselectAllButtonAction" text="%main.files.deselectall.button"/>
+            <padding>
+                <Insets left="5" right="5" top="5" bottom="5"/>
+            </padding>
+        </HBox>
+    </top>
+    <center>
+        <StackPane>
+            <ListView fx:id="filesListView"/>
+        </StackPane>
+    </center>
+    <bottom>
+        <VBox>
+            <HBox alignment="CENTER">
+                <Button onAction="#onOpenDirButtonAction" text="%main.opendir.button"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Label text="%main.incrementoffset.label"/>
+                <Spinner fx:id="incrementSpinner"/>
+                <Pane minWidth="10" maxWidth="10"/>
+                <Button fx:id="incrementButton" onAction="#onIncrementButtonAction" text="%main.incrementoffset.button" disable="true"/>
+                <padding>
+                    <Insets left="5" right="5" top="5" bottom="5"/>
+                </padding>
+            </HBox>
+            <HBox style="-fx-border-width: 1 0 0 0; -fx-border-color: #a9a9a9;">
+                <Label fx:id="statusLabel" text="%main.progress.idle.label"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <HBox fx:id="progressNode" visible="false">
+                    <Label fx:id="progressLabel"/>
+                    <ProgressBar fx:id="progressBar" minWidth="150"/>
+                </HBox>
+                <padding>
+                    <Insets left="5" right="5"/>
+                </padding>
+            </HBox>
+        </VBox>
+    </bottom>
+</BorderPane>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="Stdout" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%d{dd MMM yyyy HH:mm:ss}] [%t/%level] - %message%n"/>
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="fatal" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+        </Console>
+        <Console name="Stderr" target="SYSTEM_ERR">
+            <PatternLayout pattern="[%d{dd MMM yyyy HH:mm:ss}] [%t/%level] - %message%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="Stdout"/>
+            <AppenderRef ref="Stderr" level="warn"/>
+        </Root>
+    </Loggers>
+</Configuration>
