@@ -1,7 +1,7 @@
 # SMTools
 > A collection of tools for stepmania
 
-![GUI](https://github.com/vinsfortunato/smtools/blob/master/screenshots/screenshot.png)
+![GUI](/images/screenshot.png?raw=true)
 
 ## Features
 - Offset incrementer: Increment/Decrement the offset of a set of SIM files by a given amount
@@ -22,8 +22,6 @@ requires Java 8 (or greater) to be installed into the operating system.
 $ cd <path-to-extracted-files>
 $ java -jar SMTools.jar
 ```
-
-
 
 ## License
 
