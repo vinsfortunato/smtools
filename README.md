@@ -1,3 +1,5 @@
+![GUI](/images/logo.png?raw=true)
+
 # SMTools
 > A collection of tools for stepmania
 
