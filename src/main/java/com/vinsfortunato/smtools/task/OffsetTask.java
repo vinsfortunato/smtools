@@ -64,7 +64,7 @@ public class OffsetTask extends Task<List<File>> {
             try {
                 SimFormat format = SimFormat.fromFile(file);
                 if(format != null) {
-                    String content = Files.readString(file.toPath(), StandardCharsets.UTF_8);
+                    String content = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
                     StringBuilder output = new StringBuilder(); //Holds the output
                     boolean changed = false;
                     switch (format) {
@@ -88,7 +88,7 @@ public class OffsetTask extends Task<List<File>> {
                     }
                     if(changed) {
                         //Write changes to file
-                        Files.writeString(file.toPath(), output, StandardCharsets.UTF_8);
+                        Files.write(file.toPath(), output.toString().getBytes());
 
                         //Mark file as changed
                         result.add(file);
