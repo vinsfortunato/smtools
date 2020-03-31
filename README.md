@@ -1,9 +1,9 @@
-![GUI](/tree/media/images/logo-01.png?raw=true)
+![GUI](images/logo.png?raw=true)
 
 # SMTools [![Build Status](https://travis-ci.com/vinsfortunato/smtools.svg?branch=master)](https://travis-ci.com/vinsfortunato/smtools)
 > A collection of tools for stepmania
 
-![GUI](/tree/media/images/screenshot-01.png?raw=true)
+![GUI](images/screenshot.png?raw=true)
 
 ## Table of Contents
 * [Features](#features)
