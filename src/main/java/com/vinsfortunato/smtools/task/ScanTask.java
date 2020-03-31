@@ -42,7 +42,7 @@ public class ScanTask extends Task<List<File>> {
     }
 
     @Override
-    protected List<File> call() throws Exception {
+    protected List<File> call() {
         LOG.info("Scanning for SIM files inside {}", dir.getPath());
         List<File> result = new ArrayList<>();
 
@@ -70,7 +70,6 @@ public class ScanTask extends Task<List<File>> {
         }
 
         LOG.info("Scanning has found {} sim files inside {}", result.size(), dir.getPath());
-
         return result;
     }
 }

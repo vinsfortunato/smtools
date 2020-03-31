@@ -23,6 +23,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.text.MessageFormat;
@@ -50,7 +51,7 @@ public class OffsetTask extends Task<List<File>> {
     }
 
     @Override
-    protected List<File> call() throws Exception {
+    protected List<File> call() throws InterruptedException {
         LOG.info("Incrementing SIM files offsets by {}", String.format("%.3f", increment));
         updateTitle(Main.getLang().getString("task.offset.title"));
 
@@ -58,6 +59,12 @@ public class OffsetTask extends Task<List<File>> {
 
         int i = 0;  //The file index in the list for progress tracking
         for(File file : files) {
+            if(Thread.interrupted()) {
+                //Interrupt task and notify
+                LOG.info("Offset task interrupted. {} files have been modified.", i);
+                throw new InterruptedException();
+            }
+
             updateMessage(MessageFormat.format(Main.getLang().getString("task.offset.message.file"), file.getPath()));
             updateProgress(++i, files.size());
 
@@ -94,7 +101,7 @@ public class OffsetTask extends Task<List<File>> {
                         result.add(file);
                     }
                 }
-            } catch(Exception e) {
+            } catch(IOException e) {
                 //Suppress but warn
                 LOG.warn("Cannot increment offset for file {}", file.getPath());
             }
