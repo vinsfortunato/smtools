@@ -1,6 +1,6 @@
 ![GUI](/images/logo.png?raw=true)
 
-# SMTools
+# SMTools [![Build Status](https://travis-ci.com/vinsfortunato/smtools.svg?branch=master)](https://travis-ci.com/vinsfortunato/smtools)
 > A collection of tools for stepmania
 
 ![GUI](/images/screenshot.png?raw=true)
@@ -34,7 +34,7 @@ java -jar SMTools-<version>.jar
 where ```<path-to-release-dir>``` is the path to the extracted release directory and ```<version>``` is the version of the application.
 
 ## How to build
-To build the project you need Java JDK 1.11 (or greater) to be installed on your system.  
+To build the project you need Java JDK 11 (or greater) to be installed on your system.  
 Here is a list of shell commands to clone, build and operating with the project:
 
 **Clone repository**
