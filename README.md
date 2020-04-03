@@ -1,7 +1,11 @@
 ![GUI](images/logo.png?raw=true)
 
-# SMTools [![Build Status](https://travis-ci.com/vinsfortunato/smtools.svg?branch=master)](https://travis-ci.com/vinsfortunato/smtools)
-> A collection of tools for stepmania
+# SMTools 
+
+[![Build Status](https://travis-ci.com/vinsfortunato/smtools.svg?branch=master)](https://travis-ci.com/vinsfortunato/smtools) 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+A collection of tools for stepmania
 
 ![GUI](images/screenshot.png?raw=true)
 
@@ -60,7 +64,6 @@ gradlew run
 
 ## License
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 - **[Apache 2.0 License](https://opensource.org/licenses/Apache-2.0)**
 
 ## Acknowledgements
