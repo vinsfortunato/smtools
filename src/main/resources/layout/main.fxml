@@ -14,9 +14,9 @@
 
     <top>
         <HBox alignment="CENTER">
-            <Label text="%main.files.label"/>
+            <Button onAction="#onOpenDirButtonAction" text="%main.opendir.button"/>
             <Pane HBox.hgrow="ALWAYS"/>
-            <CheckBox fx:id="removeCheckBox" text="%main.files.remove.checkbox" selected="true"/>
+            <CheckBox fx:id="removeCheckBox" text="%main.files.remove.checkbox"/>
             <Pane minWidth="10" maxWidth="10"/>
             <Button onAction="#onRemoveSelectedButtonAction" text="%main.files.removeselected.button"/>
             <Pane minWidth="10" maxWidth="10"/>
@@ -36,14 +36,34 @@
     <bottom>
         <VBox>
             <HBox alignment="CENTER">
-                <Button onAction="#onOpenDirButtonAction" text="%main.opendir.button"/>
-                <Pane HBox.hgrow="ALWAYS"/>
                 <Label text="%main.incrementoffset.label"/>
+                <Pane minWidth="5" maxWidth="5"/>
                 <Spinner fx:id="incrementSpinner"/>
                 <Pane minWidth="10" maxWidth="10"/>
-                <Button fx:id="incrementButton" onAction="#onIncrementButtonAction" text="%main.incrementoffset.button" disable="true"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button fx:id="applyIncrementButton" onAction="#onApplyIncrementButtonAction" text="%main.apply.button" disable="true"/>
                 <padding>
-                    <Insets left="5" right="5" top="5" bottom="5"/>
+                    <Insets left="10" right="5" top="5" bottom="5"/>
+                </padding>
+            </HBox>
+            <HBox alignment="CENTER">
+                <Label text="%main.background.label"/>
+                <Pane minWidth="5" maxWidth="5"/>
+                <TextField fx:id="backgroundTextField"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button fx:id="applyBackgroundButton" onAction="#onApplyBackgroundButtonAction" text="%main.apply.button" disable="true"/>
+                <padding>
+                    <Insets left="10" right="5" top="5" bottom="5"/>
+                </padding>
+            </HBox>
+            <HBox alignment="CENTER">
+                <Label text="%main.banner.label"/>
+                <Pane minWidth="5" maxWidth="5"/>
+                <TextField fx:id="bannerTextField"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button fx:id="applyBannerButton" onAction="#onApplyBannerButtonAction" text="%main.apply.button" disable="true"/>
+                <padding>
+                    <Insets left="10" right="5" top="5" bottom="5"/>
                 </padding>
             </HBox>
             <HBox style="-fx-border-width: 1 0 0 0; -fx-border-color: #a9a9a9;">

@@ -17,10 +17,13 @@
 package com.vinsfortunato.smtools.layout;
 
 import com.vinsfortunato.smtools.Main;
+import com.vinsfortunato.smtools.task.BackgroundTask;
+import com.vinsfortunato.smtools.task.BannerTask;
 import com.vinsfortunato.smtools.task.OffsetTask;
 import com.vinsfortunato.smtools.task.ScanTask;
 import com.vinsfortunato.smtools.util.AlertUtils;
 import javafx.collections.ListChangeListener;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,9 +46,13 @@ public class MainController implements Initializable {
     private File lastDir;
 
     @FXML private CheckBox removeCheckBox;
-    @FXML private Button incrementButton;
+    @FXML private Button applyIncrementButton;
+    @FXML private Button applyBackgroundButton;
+    @FXML private Button applyBannerButton;
     @FXML private ListView<File> filesListView;
     @FXML private Spinner<Double> incrementSpinner;
+    @FXML private TextField backgroundTextField;
+    @FXML private TextField bannerTextField;
     @FXML private Label statusLabel;
     @FXML private Node progressNode;
     @FXML private Label progressLabel;
@@ -87,7 +94,9 @@ public class MainController implements Initializable {
         //Setup files list view
         filesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         filesListView.getSelectionModel().getSelectedItems().addListener((ListChangeListener<File>) c -> {
-            incrementButton.setDisable(filesListView.getSelectionModel().getSelectedItems().isEmpty());
+            applyIncrementButton.setDisable(filesListView.getSelectionModel().getSelectedItems().isEmpty());
+            applyBackgroundButton.setDisable(filesListView.getSelectionModel().getSelectedItems().isEmpty());
+            applyBannerButton.setDisable(filesListView.getSelectionModel().getSelectedItems().isEmpty());
         });
     }
 
@@ -135,7 +144,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void onIncrementButtonAction(ActionEvent event) {
+    private void onApplyIncrementButtonAction(ActionEvent event) {
         List<File> files = new ArrayList<>(filesListView.getSelectionModel().getSelectedItems());
         Double increment = incrementSpinner.getValue();
         OffsetTask task = new OffsetTask(files, increment);
@@ -175,10 +184,140 @@ public class MainController implements Initializable {
             progressBar.setProgress((double) newValue);
             progressLabel.setText(String.format("%d/%d", (int) task.getWorkDone(), (int) task.getTotalWork()));
         });
+        task.runningProperty().addListener((observable, oldValue, newValue) -> {
+            if(task.isRunning()) {
+                hideApplyButtons();
+            } else {
+                showApplyButtons();
+            }
+        });
 
         progressLabel.setText("");
         progressBar.setProgress(-1);
         progressNode.setVisible(true);
         Main.getExecutor().execute(task);
     }
+
+    @FXML
+    private void onApplyBackgroundButtonAction(ActionEvent event) {
+        List<File> files = new ArrayList<>(filesListView.getSelectionModel().getSelectedItems());
+        String replacement = backgroundTextField.getText();
+        BackgroundTask task = new BackgroundTask(files, replacement);
+        task.setOnSucceeded(e -> {
+            //Build a string containing all modified files
+            List<File> result = task.getValue();
+            StringBuilder fileList = new StringBuilder();
+            for(File file : result) {
+                fileList.append(file.getPath());
+                fileList.append("\n");
+            }
+
+            //Alert about task success
+            AlertUtils.longMessage(
+                    Alert.AlertType.INFORMATION,
+                    resources.getString("alert.background.done.title"),
+                    MessageFormat.format(resources.getString("alert.background.done.header"), result.size()),
+                    resources.getString("alert.background.done.content"),
+                    fileList.toString());
+
+            //Remove processed files from the list view if option is selected
+            if(removeCheckBox.isSelected()) {
+                filesListView.getItems().removeAll(task.getProcessedFiles());
+            }
+            progressNode.setVisible(false);
+        });
+        task.setOnFailed(e -> {
+            //Log exception and show alert message
+            Main.getLogger().error("Exception caught running background task", task.getException());
+            AlertUtils.exception("background.error", task.getException());
+            progressNode.setVisible(false);
+        });
+        task.messageProperty().addListener((observable, oldValue, newValue) -> {
+            statusLabel.setText(newValue);
+        });
+        task.progressProperty().addListener((observable, oldValue, newValue) -> {
+            progressBar.setProgress((double) newValue);
+            progressLabel.setText(String.format("%d/%d", (int) task.getWorkDone(), (int) task.getTotalWork()));
+        });
+        task.runningProperty().addListener((observable, oldValue, newValue) -> {
+            if(task.isRunning()) {
+                hideApplyButtons();
+            } else {
+                showApplyButtons();
+            }
+        });
+
+        progressLabel.setText("");
+        progressBar.setProgress(-1);
+        progressNode.setVisible(true);
+        Main.getExecutor().execute(task);
+    }
+
+    @FXML
+    private void onApplyBannerButtonAction(ActionEvent event) {
+        List<File> files = new ArrayList<>(filesListView.getSelectionModel().getSelectedItems());
+        String replacement = bannerTextField.getText();
+        BannerTask task = new BannerTask(files, replacement);
+        task.setOnSucceeded(e -> {
+            //Build a string containing all modified files
+            List<File> result = task.getValue();
+            StringBuilder fileList = new StringBuilder();
+            for(File file : result) {
+                fileList.append(file.getPath());
+                fileList.append("\n");
+            }
+
+            //Alert about task success
+            AlertUtils.longMessage(
+                    Alert.AlertType.INFORMATION,
+                    resources.getString("alert.banner.done.title"),
+                    MessageFormat.format(resources.getString("alert.banner.done.header"), result.size()),
+                    resources.getString("alert.banner.done.content"),
+                    fileList.toString());
+
+            //Remove processed files from the list view if option is selected
+            if(removeCheckBox.isSelected()) {
+                filesListView.getItems().removeAll(task.getProcessedFiles());
+            }
+            progressNode.setVisible(false);
+        });
+        task.setOnFailed(e -> {
+            //Log exception and show alert message
+            Main.getLogger().error("Exception caught running banner task", task.getException());
+            AlertUtils.exception("banner.error", task.getException());
+            progressNode.setVisible(false);
+        });
+        task.messageProperty().addListener((observable, oldValue, newValue) -> {
+            statusLabel.setText(newValue);
+        });
+        task.progressProperty().addListener((observable, oldValue, newValue) -> {
+            progressBar.setProgress((double) newValue);
+            progressLabel.setText(String.format("%d/%d", (int) task.getWorkDone(), (int) task.getTotalWork()));
+        });
+        task.runningProperty().addListener((observable, oldValue, newValue) -> {
+            if(task.isRunning()) {
+                hideApplyButtons();
+            } else {
+                showApplyButtons();
+            }
+        });
+
+        progressLabel.setText("");
+        progressBar.setProgress(-1);
+        progressNode.setVisible(true);
+        Main.getExecutor().execute(task);
+    }
+
+    void showApplyButtons() {
+        applyIncrementButton.setVisible(true);
+        applyBackgroundButton.setVisible(true);
+        applyBannerButton.setVisible(true);
+    }
+
+    void hideApplyButtons() {
+        applyIncrementButton.setVisible(false);
+        applyBackgroundButton.setVisible(false);
+        applyBannerButton.setVisible(false);
+    }
+
 }
