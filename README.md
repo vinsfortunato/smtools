@@ -17,10 +17,9 @@ A collection of tools for stepmania
 * [Acknowledgements](#acknowledgements)
 
 ## Features
-- Offset incrementer: Increment/Decrement the offset of a set of SIM files by a given amount
-
-**Upcoming**
-- Set Banner and Background: Set a given banner/background to a set of SIM files
+- Offset incrementer: Bulk increment/Decrement the offset of a set of SIM files by a given amount
+- Background replacer: Bulk replace the background string of a set of SIM files.
+- Banner replacer: Bulk replace the banner string of a set of SIM files.
 
 ## Installation
 The application is provided as an executable JAR file in the release package and
